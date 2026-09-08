@@ -1,0 +1,207 @@
+/* "Sliding stairs" mobile menu — shared by the landing and Company navs.
+   Everything is namespaced `um-` and lives outside the `.upark` /
+   `.upark-company` scopes so it can be dropped into either nav. */
+
+.um-burger {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 101;
+  width: 116px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+}
+
+@media (max-width: 768px) {
+  .um-burger {
+    display: block;
+  }
+}
+
+.um-burger__bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+  background: var(--um-accent, #0044ff);
+  transition: height 0.3s var(--ease-apple, cubic-bezier(0.25, 1, 0.5, 1));
+}
+
+.um-burger:hover .um-burger__bg,
+.um-burger:focus-visible .um-burger__bg {
+  height: 100%;
+}
+
+.um-burger__icon {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.um-burger__label {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* While the menu is open, hide the underlying fixed site nav — it's fully
+   covered and its backdrop-filter otherwise bleeds through the overlay. */
+body.um-menu-open nav {
+  visibility: hidden;
+}
+
+/* Overlay -------------------------------------------------------------- */
+.um-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.um-overlay.is-open {
+  pointer-events: auto;
+}
+
+.um-stairs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.um-bar {
+  width: 20vw;
+  height: 0;
+  background: #000;
+}
+
+.um-backdrop {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+}
+
+.um-menu {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem clamp(1.25rem, 6vw, 3rem) 2rem;
+  opacity: 0;
+}
+
+.um-menu__header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.um-close {
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.um-close svg path {
+  stroke: currentColor;
+  transition: stroke 0.3s;
+}
+
+.um-close:hover,
+.um-close:focus-visible {
+  color: var(--um-accent, #0044ff);
+}
+
+.um-menu__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  overflow-y: auto;
+  perspective: 1000px;
+}
+
+.um-menu__link {
+  display: block;
+  padding: 0.55rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-family: var(--font-display, "Inter", sans-serif);
+  font-weight: 900;
+  font-size: clamp(2rem, 10vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform-origin: top center;
+}
+
+.um-menu__link:last-of-type {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.um-menu__link:active,
+.um-menu__link:focus-visible {
+  color: var(--um-accent, #0044ff);
+}
+
+.um-menu__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  opacity: 0;
+}
+
+.um-cta {
+  align-self: flex-start;
+  padding: 0.85rem 1.6rem;
+  border-radius: 100px;
+  background: var(--um-accent, #0044ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.um-social {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.um-social a {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 100px;
+  color: #fff;
+  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .um-burger__bg {
+    transition: none;
+  }
+}

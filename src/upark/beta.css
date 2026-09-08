@@ -1,0 +1,290 @@
+/* UPark — Join the Beta page.
+   Component-level styles ported from the source design, scoped under
+   `.upark-beta` and placed in Tailwind's `components` layer so utility classes
+   in the markup still win any conflict. */
+
+@layer components {
+  .upark-beta {
+    --bg: #f4f4f6;
+    --fg: #111111;
+    --gray-light: #e5e5e7;
+    --gray-med: #888888;
+    --brand: #0044ff;
+    --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    line-height: 1.4;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .upark-beta ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* Type scale — t-monumental / t-hero / t-h1 dialled down from the source
+     (clamp(3.5rem,8vw,7.5rem) / clamp(3rem,6vw,6.5rem) / clamp(2.5rem,5vw,4.5rem))
+     to match the calmer scale already used on Company / Investors / Product. */
+  .upark-beta .t-monumental {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .upark-beta .t-hero {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .upark-beta .t-h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .upark-beta .t-h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .upark-beta .t-body-l {
+    font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--gray-med);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+
+  .upark-beta .t-body-m {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--gray-med);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  .upark-beta .t-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray-med);
+  }
+
+  /* Nav */
+  .upark-beta nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(244, 244, 246, 0.8);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 229, 231, 0.5);
+    transition: all 0.3s var(--ease-apple);
+  }
+
+  .upark-beta nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .upark-beta .nav-logo {
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: -0.05em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .upark-beta .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .upark-beta .nav-links a {
+    color: var(--fg);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .upark-beta .nav-links a:hover {
+    opacity: 1;
+  }
+
+  .upark-beta .nav-links a.active {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .upark-beta .company-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 180px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--ease-apple);
+  }
+
+  .upark-beta .nav-group:hover .company-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .upark-beta .company-dropdown a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.6;
+    padding: 0.25rem 0;
+    text-align: center;
+    transition: all 0.25s ease;
+  }
+
+  .upark-beta .company-dropdown a:hover {
+    opacity: 1;
+    color: var(--brand);
+    transform: translateX(4px);
+  }
+
+  /* Buttons */
+  .upark-beta .btn {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .upark-beta .btn:hover {
+    transform: scale(1.05);
+  }
+
+  .upark-beta .btn-outline {
+    background: transparent;
+    border: 1px solid var(--gray-light);
+    color: var(--fg);
+  }
+
+  .upark-beta .btn-outline:hover {
+    border-color: var(--fg);
+  }
+
+  /* Form controls */
+  .upark-beta select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+  }
+
+  .upark-beta .form-input {
+    width: 100%;
+    background-color: #f9fafb;
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: var(--fg);
+    font-family: inherit;
+    transition: all 0.2s var(--ease-apple);
+  }
+
+  .upark-beta .form-input:focus {
+    outline: none;
+    border-color: var(--brand);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 68, 255, 0.1);
+  }
+
+  .upark-beta .form-input::placeholder {
+    color: #9ca3af;
+  }
+
+  /* Scrollbar hiding */
+  .upark-beta .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .upark-beta .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Footer */
+  .upark-beta footer a {
+    transition: color 0.25s ease;
+  }
+
+  @media (max-width: 768px) {
+    .upark-beta .nav-links {
+      display: none;
+    }
+    .upark-beta .t-hero {
+      font-size: 2.5rem;
+    }
+    .upark-beta .t-monumental {
+      font-size: 2.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .upark-beta *,
+    .upark-beta *::before,
+    .upark-beta *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

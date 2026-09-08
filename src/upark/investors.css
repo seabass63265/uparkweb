@@ -1,0 +1,433 @@
+/* UPark — Investors page.
+   Component-level styles ported from the source design, scoped under
+   `.upark-investors` and placed in Tailwind's `components` layer so utility
+   classes in the markup still win any conflict. */
+
+@layer components {
+  .upark-investors {
+    --bg: #f4f4f6;
+    --fg: #111111;
+    --gray-light: #e5e5e7;
+    --gray-med: #888888;
+    --brand: #0044ff;
+    --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    line-height: 1.4;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .upark-investors ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* Type scale — dialled down from the source (t-monumental clamp(3.5rem,8vw,9rem),
+     t-hero clamp(3rem,6vw,6.5rem), t-h1 clamp(2.5rem,5vw,4.5rem)) so headings sit
+     on screen, matching the calmer Company-page scale. */
+  .upark-investors .t-monumental {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .upark-investors .t-hero {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .upark-investors .t-h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .upark-investors .t-h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .upark-investors .t-body-l {
+    font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--gray-med);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+
+  .upark-investors .t-body-m {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--fg);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  .upark-investors .t-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray-med);
+  }
+
+  /* Nav */
+  .upark-investors nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(244, 244, 246, 0.8);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 229, 231, 0.5);
+    transition: all 0.3s var(--ease-apple);
+  }
+
+  .upark-investors nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .upark-investors .nav-logo {
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: -0.05em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .upark-investors .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .upark-investors .nav-links a {
+    color: var(--fg);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .upark-investors .nav-links a:hover,
+  .upark-investors .nav-links a.active {
+    opacity: 1;
+  }
+
+  .upark-investors .company-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 180px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--ease-apple);
+  }
+
+  .upark-investors .nav-group:hover .company-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .upark-investors .company-dropdown a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.6;
+    padding: 0.25rem 0;
+    text-align: center;
+    transition: all 0.25s ease;
+  }
+
+  .upark-investors .company-dropdown a:hover {
+    opacity: 1;
+    color: var(--brand);
+    transform: translateX(4px);
+  }
+
+  .upark-investors .btn {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+
+  .upark-investors .btn:hover {
+    transform: scale(1.05);
+  }
+
+  .upark-investors .btn-outline {
+    background: transparent;
+    border: 1px solid var(--gray-light);
+    color: var(--fg);
+  }
+
+  .upark-investors .btn-outline:hover {
+    border-color: var(--fg);
+  }
+
+  /* Section shell */
+  .upark-investors section {
+    position: relative;
+    padding: 10rem 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .upark-investors .content-wrap {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Hero backdrop */
+  .upark-investors .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .upark-investors .car-dot {
+    fill: var(--brand);
+    opacity: 0;
+  }
+
+  /* Phone mockups (platform section) */
+  .upark-investors .phone-mockup {
+    width: 300px;
+    height: 600px;
+    border-radius: 44px;
+    background: white;
+    border: 8px solid #e5e5e7;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.05), inset 0 0 0 2px #fff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .upark-investors .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 24px;
+    background: #e5e5e7;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 10;
+  }
+
+  /* Vertical offset for the two platform columns (margin, not transform, so it
+     survives the GSAP reveal animation). */
+  .upark-investors .platform-col-down {
+    margin-top: 20px;
+  }
+  .upark-investors .platform-col-up {
+    margin-top: -20px;
+  }
+
+  /* Network draw-in (go-to-market) */
+  .upark-investors .node-network path,
+  .upark-investors .gtm-link {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+
+  /* Team / founders */
+  .upark-investors .team-portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #e8e8ea;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2rem;
+    transition: transform 0.5s var(--ease-apple);
+  }
+
+  .upark-investors .team-card:hover .team-portrait {
+    transform: translateY(-10px);
+  }
+
+  .upark-investors .portrait-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 6rem;
+    color: #d8d8da;
+    letter-spacing: -0.05em;
+  }
+
+  /* Vision (closing pinned section) */
+  .upark-investors .vision-sec {
+    background: var(--fg);
+    color: white;
+    min-height: 300vh;
+    padding: 0;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .upark-investors .vision-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  .upark-investors .vision-text {
+    position: absolute;
+    text-align: center;
+    max-width: 1200px;
+    z-index: 20;
+    will-change: transform, opacity;
+  }
+
+  .upark-investors .vision-bg-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .upark-investors .vision-svg-group {
+    will-change: transform, opacity;
+    transform-origin: center;
+  }
+
+  /* Footer */
+  .upark-investors footer {
+    padding: 6rem 2rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .upark-investors footer a {
+    transition: color 0.25s ease;
+  }
+
+  /* Back-to-top */
+  .upark-investors .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    background: var(--fg);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s var(--ease-apple);
+    z-index: 90;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: none;
+    font-size: 1.25rem;
+  }
+
+  .upark-investors .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .upark-investors .back-to-top:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: var(--brand);
+  }
+
+  @media (max-width: 768px) {
+    .upark-investors .nav-links {
+      display: none;
+    }
+    .upark-investors section {
+      padding: 6rem 1.5rem;
+    }
+    .upark-investors .t-hero {
+      font-size: 2.25rem;
+    }
+    .upark-investors .t-monumental {
+      font-size: 2.5rem;
+    }
+    .upark-investors .phone-mockup {
+      width: 260px;
+      height: 520px;
+    }
+    .upark-investors .team-portrait {
+      aspect-ratio: 1 / 1;
+    }
+  }
+}

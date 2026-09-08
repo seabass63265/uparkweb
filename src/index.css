@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Design tokens shared by the UPark pages, exposed to Tailwind utilities
+   (text-brand, bg-bg, font-mono, …). */
+@theme {
+  --color-brand: #0044ff;
+  --color-bg: #f4f4f6;
+  --color-fg: #111111;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: #f4f4f6;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
