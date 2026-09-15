@@ -115,6 +115,11 @@ export function initProductAnimations(root: HTMLElement): () => void {
 
     /* PARK — the car slides into the bay and the badge confirms */
     if (root.querySelector('#park-car')) {
+      // Hand horizontal centering to GSAP (xPercent) instead of a Tailwind
+      // transform class — a class-based transform gets clobbered the moment
+      // GSAP writes its own `y`, so the car would drift sideways as it rose.
+      gsap.set('#park-car', { xPercent: -50 })
+
       const parkTl = gsap.timeline({
         scrollTrigger: { trigger: '#park', start: 'top 55%' },
       })

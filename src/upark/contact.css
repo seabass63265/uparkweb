@@ -1,22 +1,10 @@
-/* UPark — Product page.
+/* UPark — Contact page.
    Component-level styles ported from the source design, scoped under
-   `.upark-product` and placed in Tailwind's `components` layer so utility
+   `.upark-contact` and placed in Tailwind's `components` layer so utility
    classes in the markup still win any conflict. */
 
-/* Keyframes must live at the top level — Lightning CSS rejects @keyframes
-   nested inside a style rule. */
-@keyframes uparkProductFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
 @layer components {
-  .upark-product {
+  .upark-contact {
     --bg: #f4f4f6;
     --fg: #111111;
     --gray-light: #e5e5e7;
@@ -36,15 +24,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .upark-product ::selection {
+  .upark-contact ::selection {
     background: var(--fg);
     color: var(--bg);
   }
 
-  /* Type scale — t-hero / t-h1 dialled down from the source
-     (clamp(3rem,6vw,6.5rem) / clamp(2.5rem,5vw,4.5rem)) to match the calmer
-     Company / Investors scale already used across the site. */
-  .upark-product .t-monumental {
+  /* Type scale — t-monumental / t-hero / t-h1 dialled down from the source
+     (clamp(3.5rem,8vw,7.5rem) / clamp(3rem,6vw,6.5rem) / clamp(2.5rem,5vw,4.5rem))
+     to match the calmer scale already used on Company / Investors / Product / Beta. */
+  .upark-contact .t-monumental {
     font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -53,7 +41,7 @@
     text-transform: uppercase;
   }
 
-  .upark-product .t-hero {
+  .upark-contact .t-hero {
     font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.25rem, 4.5vw, 4rem);
@@ -61,7 +49,7 @@
     line-height: 1;
   }
 
-  .upark-product .t-h1 {
+  .upark-contact .t-h1 {
     font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.25rem, 4vw, 3.75rem);
@@ -69,7 +57,7 @@
     line-height: 1.05;
   }
 
-  .upark-product .t-h2 {
+  .upark-contact .t-h2 {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: clamp(1.75rem, 3.5vw, 3rem);
@@ -77,7 +65,7 @@
     line-height: 1.1;
   }
 
-  .upark-product .t-body-l {
+  .upark-contact .t-body-l {
     font-size: clamp(1.125rem, 1.5vw, 1.5rem);
     font-weight: 500;
     color: var(--gray-med);
@@ -85,7 +73,7 @@
     line-height: 1.5;
   }
 
-  .upark-product .t-body-m {
+  .upark-contact .t-body-m {
     font-size: 1.125rem;
     font-weight: 400;
     color: var(--gray-med);
@@ -93,7 +81,7 @@
     letter-spacing: -0.01em;
   }
 
-  .upark-product .t-mono {
+  .upark-contact .t-mono {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -102,7 +90,7 @@
   }
 
   /* Nav */
-  .upark-product nav {
+  .upark-contact nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -119,12 +107,12 @@
     transition: all 0.3s var(--ease-apple);
   }
 
-  .upark-product nav.scrolled {
+  .upark-contact nav.scrolled {
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   }
 
-  .upark-product .nav-logo {
+  .upark-contact .nav-logo {
     font-weight: 900;
     font-size: 1.25rem;
     letter-spacing: -0.05em;
@@ -134,13 +122,13 @@
     align-items: center;
   }
 
-  .upark-product .nav-logo img {
+  .upark-contact .nav-logo img {
     height: 34px;
     width: auto;
     display: block;
   }
 
-  .upark-product .nav-links {
+  .upark-contact .nav-links {
     display: flex;
     gap: 2.5rem;
     margin-left: auto;
@@ -150,23 +138,24 @@
     align-items: center;
   }
 
-  .upark-product .nav-links a {
+  .upark-contact .nav-links a {
     color: var(--fg);
     text-decoration: none;
     opacity: 0.6;
     transition: opacity 0.2s;
   }
 
-  .upark-product .nav-links a:hover {
+  .upark-contact .nav-links a:hover {
     opacity: 1;
   }
 
-  .upark-product .nav-links a.active {
+  .upark-contact .nav-links a.active {
     opacity: 1;
     font-weight: 700;
   }
 
-  .upark-product .btn {
+  /* Buttons */
+  .upark-contact .btn {
     background: var(--fg);
     color: var(--bg);
     padding: 0.75rem 1.5rem;
@@ -178,74 +167,85 @@
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    transition: transform 0.2s, background 0.2s;
+    transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
     cursor: pointer;
+    border: none;
   }
 
-  .upark-product .btn:hover {
+  .upark-contact .btn:hover {
     transform: scale(1.05);
   }
 
-  .upark-product .nav-btn {
+  .upark-contact .nav-btn {
     background: var(--brand);
     color: white;
   }
 
-  .upark-product .btn-outline {
+  .upark-contact .btn-outline {
     background: transparent;
     border: 1px solid var(--gray-light);
     color: var(--fg);
   }
 
-  .upark-product .btn-outline:hover {
+  .upark-contact .btn-outline:hover {
     border-color: var(--fg);
   }
 
-  /* Phone mockup */
-  .upark-product .phone-mockup {
-    width: 320px;
-    height: 650px;
-    border-radius: 44px;
-    background: white;
-    border: 8px solid #e5e5e7;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.05), inset 0 0 0 2px #fff;
-    position: relative;
+  /* Form controls */
+  .upark-contact select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+  }
+
+  .upark-contact .form-input {
+    width: 100%;
+    background-color: #f9fafb;
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: var(--fg);
+    font-family: inherit;
+    transition: all 0.2s var(--ease-apple);
+  }
+
+  .upark-contact .form-input:focus {
+    outline: none;
+    border-color: var(--brand);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 68, 255, 0.1);
+  }
+
+  .upark-contact .form-input::placeholder {
+    color: #9ca3af;
+  }
+
+  /* FAQ accordion — grid-rows collapse so height animates without JS measuring. */
+  .upark-contact .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+  }
+
+  .upark-contact .faq-content.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .upark-contact .faq-content > div {
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
   }
 
-  .upark-product .phone-notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 24px;
-    background: #e5e5e7;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    z-index: 100;
-  }
-
-  /* Horizontal card strip */
-  .upark-product .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .upark-product .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Floating hero chips */
-  .upark-product .gs-float {
-    animation: uparkProductFloat 4s ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
+  .upark-contact .faq-icon {
+    transition: transform 0.3s ease-out;
   }
 
   /* Back-to-top */
-  .upark-product .back-to-top {
+  .upark-contact .back-to-top {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -268,36 +268,36 @@
     font-size: 1.25rem;
   }
 
-  .upark-product .back-to-top.visible {
+  .upark-contact .back-to-top.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
 
-  .upark-product .back-to-top:hover {
+  .upark-contact .back-to-top:hover {
     transform: translateY(-4px) scale(1.05);
     background: var(--brand);
   }
 
   @media (max-width: 768px) {
-    .upark-product .nav-links {
+    .upark-contact .nav-links {
       display: none;
     }
-    .upark-product .phone-mockup {
-      width: 280px;
-      height: 580px;
+    .upark-contact .t-hero {
+      font-size: 2.5rem;
     }
-    .upark-product .t-hero {
-      font-size: 3rem;
-    }
-    .upark-product .t-h1 {
-      font-size: 2.25rem;
+    .upark-contact .t-monumental {
+      font-size: 2.75rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .upark-product .gs-float {
-      animation: none;
+    .upark-contact *,
+    .upark-contact *::before,
+    .upark-contact *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 }

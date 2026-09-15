@@ -11,12 +11,6 @@ const STREAMS = [
     tag: 'Future',
     tagClass: 'bg-gray-100 text-gray-500',
   },
-  {
-    title: 'University Partnerships',
-    body: 'Potential future software, parking coordination, analytics, and mobility services licensed to university partners.',
-    tag: 'Future',
-    tagClass: 'bg-gray-100 text-gray-500',
-  },
 ]
 
 export default function BusinessModelSection() {
@@ -47,16 +41,6 @@ export default function BusinessModelSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 p-8 border border-dashed border-gray-300 rounded-3xl">
-          <span className="t-mono text-gray-500 mb-4 block">
-            ADDITIONAL FUTURE OPPORTUNITIES
-          </span>
-          <p className="text-sm text-gray-600 font-medium">
-            Event Parking · EV Charging Coordination · Commercial Parking ·
-            Mobility Analytics · Strategic Partnerships
-          </p>
         </div>
       </div>
     </section>

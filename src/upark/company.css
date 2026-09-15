@@ -113,11 +113,21 @@
     letter-spacing: -0.05em;
     color: var(--fg);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .upark-company .nav-logo img {
+    height: 34px;
+    width: auto;
+    display: block;
   }
 
   .upark-company .nav-links {
     display: flex;
     gap: 2.5rem;
+    margin-left: auto;
+    margin-right: 2.5rem;
     font-size: 0.875rem;
     font-weight: 500;
     align-items: center;
@@ -138,46 +148,6 @@
     opacity: 1;
   }
 
-  .upark-company .company-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: rgba(255, 255, 255, 0.95);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--gray-light);
-    border-radius: 16px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 180px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s var(--ease-apple);
-  }
-
-  .upark-company .nav-group:hover .company-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .upark-company .company-dropdown a {
-    font-size: 0.875rem;
-    font-weight: 500;
-    opacity: 0.6;
-    padding: 0.25rem 0;
-    text-align: center;
-  }
-
-  .upark-company .company-dropdown a:hover {
-    opacity: 1;
-    color: var(--brand);
-  }
-
   .upark-company .btn {
     background: var(--fg);
     color: var(--bg);
@@ -195,6 +165,11 @@
 
   .upark-company .btn:hover {
     transform: scale(1.05);
+  }
+
+  .upark-company .nav-btn {
+    background: var(--brand);
+    color: white;
   }
 
   .upark-company .btn-outline {
@@ -364,14 +339,8 @@
     color: white;
   }
 
-  .upark-company .nav-links a,
-  .upark-company .company-dropdown a,
-  .upark-company footer a {
+  .upark-company .nav-links a {
     transition: all 0.25s ease;
-  }
-
-  .upark-company .company-dropdown a:hover {
-    transform: translateX(4px);
   }
 
   /* Mission item hover */
@@ -424,17 +393,6 @@
   .upark-company .back-to-top:hover {
     transform: translateY(-4px) scale(1.05);
     background: var(--brand);
-  }
-
-  /* Footer */
-  .upark-company footer {
-    padding: 6rem 2rem 3rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    border-top: 1px solid var(--gray-light);
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
   }
 
   @media (max-width: 768px) {

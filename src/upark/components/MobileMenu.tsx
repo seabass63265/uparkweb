@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
+import { InstagramIcon, LinkedInIcon, TikTokIcon } from './contact/icons'
 import './mobile-menu.css'
 
 export type MobileMenuItem = {
@@ -17,7 +18,11 @@ type MobileMenuProps = {
 }
 
 const EASE = 'power2.out'
-const SOCIAL = ['IN', 'X', 'IG']
+const SOCIAL = [
+  { label: 'Instagram', Icon: InstagramIcon },
+  { label: 'TikTok', Icon: TikTokIcon },
+  { label: 'LinkedIn', Icon: LinkedInIcon },
+]
 
 /**
  * Burger button (mobile only) that opens a full-screen "sliding stairs"
@@ -271,9 +276,9 @@ export default function MobileMenu({ items, cta }: MobileMenuProps) {
           <div className="um-menu__footer">
             {cta && renderLink(cta, 'um-cta')}
             <div className="um-social">
-              {SOCIAL.map((s) => (
-                <a key={s} href="#">
-                  {s}
+              {SOCIAL.map(({ label, Icon }) => (
+                <a key={label} href="#" aria-label={label}>
+                  <Icon />
                 </a>
               ))}
             </div>

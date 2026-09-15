@@ -7,9 +7,7 @@ import BetaLmuSection from './components/beta/BetaLmuSection'
 import BetaBenefitsSection from './components/beta/BetaBenefitsSection'
 import BetaStepsSection from './components/beta/BetaStepsSection'
 import BetaFormSection from './components/beta/BetaFormSection'
-import BetaOtherUnisSection from './components/beta/BetaOtherUnisSection'
-import BetaClosingSection from './components/beta/BetaClosingSection'
-import BetaFooter from './components/beta/BetaFooter'
+import SiteFooter from './components/SiteFooter'
 
 /** UPark — Join the Beta page (/join). */
 export default function BetaPage() {
@@ -28,9 +26,7 @@ export default function BetaPage() {
       <BetaBenefitsSection />
       <BetaStepsSection />
       <BetaFormSection />
-      <BetaOtherUnisSection />
-      <BetaClosingSection />
-      <BetaFooter />
+      <SiteFooter active="join" />
     </div>
   )
 }

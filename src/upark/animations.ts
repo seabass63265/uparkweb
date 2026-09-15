@@ -107,15 +107,6 @@ export function initUparkAnimations(root: HTMLElement): () => void {
         '-=0.5',
       )
 
-    /* UNIVERSITIES — data node labels drift in */
-    gsap.to('.node-label', {
-      scrollTrigger: { trigger: '.uni-sec', start: 'top 60%' },
-      y: 0,
-      opacity: 1,
-      stagger: 0.2,
-      ease: 'power2.out',
-    })
-
     /* VISION — text hands off to the network graph */
     const visTl = gsap.timeline({
       scrollTrigger: {

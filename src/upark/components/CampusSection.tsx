@@ -1,18 +1,18 @@
 const STOPS = [
   {
-    time: '8:00 AM',
+    time: '11:35 AM',
     tag: 'Class',
     title: 'Park near your morning class.',
     desc: 'Reserve a spot on the academic side of campus.',
   },
   {
-    time: '12:30 PM',
+    time: '2:00 PM',
     tag: 'Home',
     title: 'Heading home after class?',
     desc: 'List your spot so another student can take it when you pull out.',
   },
   {
-    time: '4:00 PM',
+    time: '5:00 PM',
     tag: 'Practice',
     title: 'Back for practice.',
     desc: 'Find a different spot closer to the athletic complex.',
@@ -33,10 +33,8 @@ export default function CampusSection() {
       <div className="timeline">
         {STOPS.map((stop) => (
           <div key={stop.time} className="time-stop">
-            <div className="time-label">
-              {stop.time}
-              <span className="time-tag">{stop.tag}</span>
-            </div>
+            <div className="time-label">{stop.time}</div>
+            <span className="time-tag">{stop.tag}</span>
             <div className="time-dot" />
             <div className="time-title">{stop.title}</div>
             <div className="time-desc">{stop.desc}</div>

@@ -29,6 +29,12 @@
     50% { transform: translateY(4px); }
 }
 
+/* Layered (like the other page stylesheets) so Tailwind utility classes in
+   the markup still win any conflict — notably the `*{margin:0;padding:0}`
+   reset below, which previously sat unlayered and so always beat layered
+   Tailwind utilities (e.g. padding/margin on SiteFooter) regardless of
+   specificity, per the CSS cascade-layers spec. */
+@layer components {
 .upark {
     background-color: var(--bg);
     color: var(--fg);
@@ -140,6 +146,14 @@
         letter-spacing: -0.05em;
         color: inherit;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-logo img {
+        height: 34px;
+        width: auto;
+        display: block;
     }
 
     .nav-links {
@@ -600,18 +614,16 @@
     }
 
     .time-label {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        gap: 0.5rem;
         font-weight: 600;
         font-size: 1.1rem;
     }
 
     .time-tag {
+        display: block;
+        margin-top: 0.35rem;
         font-family: var(--font-mono);
-        font-size: 0.7rem;
-        font-weight: 500;
+        font-size: 1rem;
+        font-weight: 600;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--brand);
@@ -657,6 +669,15 @@
         overflow: hidden;
     }
 
+    /* On narrow screens the heading is too long for one line — the box then
+       fills the available width (flexbox fit-content hitting its ceiling),
+       so centering needs an explicit text-align, not just align-items. Scoped
+       to the heading itself so it doesn't cascade into the driver/provider
+       panels below, which keep their own left/right alignment on desktop. */
+    .ts-sticky h2 {
+        text-align: center;
+    }
+
     .ts-panels {
         display: flex;
         width: 100vw;
@@ -699,53 +720,6 @@
         letter-spacing: -0.05em;
         border-radius: 100px;
         z-index: 10;
-    }
-
-    /* Universities */
-    .uni-sec {
-        position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .uni-bg {
-        position: absolute;
-        inset: 0;
-        background: #E8E8EA;
-        z-index: -1;
-        opacity: 0.5;
-    }
-
-    .uni-nodes {
-        position: absolute;
-        inset: 0;
-    }
-
-    .node-label {
-        position: absolute;
-        font-family: var(--font-mono);
-        font-size: 0.7rem;
-        background: white;
-        padding: 4px 8px;
-        border: 1px solid var(--gray-light);
-        border-radius: 4px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    .uni-content {
-        background: rgba(255,255,255,0.9);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
-        padding: 4rem;
-        border-radius: 20px;
-        text-align: center;
-        max-width: 800px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.05);
     }
 
     /* Vision */
@@ -804,55 +778,6 @@
 
     .cta-huge .less { color: var(--gray-med); }
 
-    /* Footer */
-    footer {
-        padding: 4rem 2rem 2rem;
-        max-width: 1400px;
-        margin: 0 auto;
-        border-top: 1px solid var(--gray-light);
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-    }
-
-    .footer-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    .footer-links {
-        display: flex;
-        gap: 4rem;
-    }
-
-    .footer-col {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .footer-col a {
-        color: var(--gray-med);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--fg); }
-
-    .footer-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--gray-med);
-        font-size: 0.875rem;
-    }
-
-    .footer-legal {
-        display: flex;
-        gap: 2rem;
-    }
-
     @media (max-width: 900px) {
         .hero-content {
             position: relative;
@@ -876,8 +801,14 @@
         .nav-links, .nav-btn { display: none; }
 
         /* Phone hero: the "align U with Product" indent only makes sense on
-           wide layouts — the nav links are hidden here. */
-        .hero-content { padding: 6rem 1.5rem 4rem; }
+           wide layouts — the nav links are hidden here. Still nudged right
+           off the screen edge rather than flush against it. */
+        .hero-content {
+            padding-top: 6rem;
+            padding-right: 1.5rem;
+            padding-bottom: 4rem;
+            padding-left: 4.5rem;
+        }
 
         /* Problem section: keep each journey on a single line (shrunk to fit)
            so the horizontal strike-line still sweeps across it. */
@@ -960,8 +891,6 @@
         }
         .ts-panels { flex-direction: column; height: 80vh; }
         .ts-panel { align-items: center !important; text-align: center !important; border-right: none; border-bottom: 1px solid var(--gray-light); padding: 2rem;}
-        .footer-top { flex-direction: column; gap: 2rem; }
-        .footer-links { flex-direction: column; gap: 2rem; }
-        .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     }
+}
 }

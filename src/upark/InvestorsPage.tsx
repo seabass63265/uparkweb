@@ -13,7 +13,7 @@ import BusinessModelSection from './components/investors/BusinessModelSection'
 import TractionSection from './components/investors/TractionSection'
 import FoundersSection from './components/investors/FoundersSection'
 import InvestSection from './components/investors/InvestSection'
-import InvestorsFooter from './components/investors/InvestorsFooter'
+import SiteFooter from './components/SiteFooter'
 import BackToTop from './components/company/BackToTop'
 
 /** UPark — Investors page (/investors). */
@@ -39,7 +39,7 @@ export default function InvestorsPage() {
       <TractionSection />
       <FoundersSection />
       <InvestSection />
-      <InvestorsFooter />
+      <SiteFooter active="investors" />
       <BackToTop />
     </div>
   )

@@ -19,7 +19,7 @@ export default function ParkSection() {
 
           <div
             id="park-car"
-            className="absolute w-[180px] h-[300px] bg-black rounded-[32px] shadow-2xl z-10 left-1/2 -translate-x-1/2 -bottom-[350px] border-[4px] border-gray-800 flex flex-col justify-between p-4"
+            className="absolute w-[180px] h-[300px] bg-black rounded-[32px] shadow-2xl z-10 left-1/2 -bottom-[350px] border-[4px] border-gray-800 flex flex-col justify-between p-4"
           >
             <div className="w-full h-16 bg-white/10 rounded-xl" />
             <div className="w-full h-24 bg-red-500/10 rounded-xl" />

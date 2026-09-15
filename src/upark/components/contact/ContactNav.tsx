@@ -9,8 +9,8 @@ const MOBILE_LINKS: MobileMenuItem[] = [
   { label: 'Contact', to: '/contact' },
 ]
 
-/** Fixed glass nav with the hover "Company" dropdown. */
-export default function CompanyNav() {
+/** Fixed glass nav, "Contact" active. */
+export default function ContactNav() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -29,12 +29,12 @@ export default function CompanyNav() {
         <div className="nav-links">
           <Link to="/product">Product</Link>
 
-          <a href="#top" className="active">
-            Company
-          </a>
+          <Link to="/company">Company</Link>
 
           <Link to="/investors">Investors</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact" className="active">
+            Contact
+          </Link>
         </div>
         <Link to="/join" className="btn nav-btn hidden md:inline-flex">
           Join Beta

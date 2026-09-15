@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRightIcon } from './icons'
 
 const CONTACT_CARDS = [
@@ -37,26 +38,27 @@ export default function ContactSection() {
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 gs-stagger">
           {CONTACT_CARDS.map((card) => (
-            <div
+            <Link
               key={card.title}
-              className="p-8 border border-gray-200 rounded-3xl hover:border-black transition-colors group cursor-pointer"
+              to="/contact"
+              className="p-8 border border-gray-200 rounded-3xl hover:border-black transition-colors group cursor-pointer block"
             >
               <h4 className="text-xl font-bold mb-2">{card.title}</h4>
               <p className="text-gray-500 mb-8">{card.body}</p>
               <div className="text-brand font-medium flex items-center gap-2 group-hover:translate-x-2 transition-transform">
                 {card.cta} <ArrowRightIcon />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="text-center">
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="btn btn-interactive py-4 px-8 text-lg border border-black"
           >
             Contact UPark →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -4,9 +4,9 @@ import MobileMenu, { type MobileMenuItem } from './MobileMenu'
 
 const LINKS: MobileMenuItem[] = [
   { label: 'Product', to: '/product' },
-  { label: 'Universities', to: '/' },
   { label: 'Company', to: '/company' },
   { label: 'Investors', to: '/investors' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 type NavProps = {
@@ -33,14 +33,20 @@ export default function Nav({ revealed }: NavProps) {
           .join(' ')}
       >
         <Link to="/" className="nav-logo">
-          UPARK
+          <img src="/uparklogo-icon.png" alt="UPark" />
         </Link>
         <div className="nav-links">
-          {LINKS.map((link) => (
-            <Link key={link.label} to={link.to ?? '/'}>
-              {link.label}
-            </Link>
-          ))}
+          {LINKS.map((link) =>
+            link.to ? (
+              <Link key={link.label} to={link.to}>
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.label} href={link.href ?? '#'}>
+                {link.label}
+              </a>
+            ),
+          )}
         </div>
         <Link to="/join" className="btn nav-btn">
           Join Beta

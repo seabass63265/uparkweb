@@ -5,6 +5,7 @@ import App from './App.tsx'
 import ProductPage from './upark/ProductPage.tsx'
 import CompanyPage from './upark/CompanyPage.tsx'
 import InvestorsPage from './upark/InvestorsPage.tsx'
+import ContactPage from './upark/ContactPage.tsx'
 import BetaPage from './upark/BetaPage.tsx'
 import ScrollToTop from './upark/ScrollToTop.tsx'
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/product" element={<ProductPage />} />
       <Route path="/company" element={<CompanyPage />} />
       <Route path="/investors" element={<InvestorsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/join" element={<BetaPage />} />
     </Routes>
   </BrowserRouter>,

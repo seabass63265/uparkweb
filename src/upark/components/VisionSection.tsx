@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-const NUM_NODES = 20
+const NUM_NODES = 42
 const CENTER = { x: 500, y: 500 }
 
 type Circle = { cx: number; cy: number; r: number }
@@ -13,8 +13,8 @@ function buildNetwork() {
   const lines: Line[] = []
 
   for (let i = 0; i < NUM_NODES; i++) {
-    const cx = 100 + Math.random() * 800
-    const cy = 100 + Math.random() * 800
+    const cx = 30 + Math.random() * 940
+    const cy = 30 + Math.random() * 940
     nodes.push({ x: cx, y: cy })
     circles.push({ cx, cy, r: Math.random() * 3 + 2 })
 
@@ -38,7 +38,7 @@ export default function VisionSection() {
     <div className="vision-sec">
       <div className="vision-sticky">
         <div className="vision-text-layer v-text-1">
-          <h2 className="t-h1">Parking is just the beginning.</h2>
+          <h2 className="t-h1">One campus is just the beginning.</h2>
         </div>
 
         <svg
@@ -68,7 +68,7 @@ export default function VisionSection() {
 
         <div className="vision-text-layer v-text-2">
           <h2 className="t-h1" style={{ maxWidth: 900 }}>
-            Building the mobility layer around campus life.
+            Prove it here. Scale it everywhere.
           </h2>
         </div>
       </div>

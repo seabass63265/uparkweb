@@ -11,7 +11,7 @@ import ParkSection from './components/product/ParkSection'
 import SubscriptionSection from './components/product/SubscriptionSection'
 import JourneyStrip from './components/product/JourneyStrip'
 import JoinSection from './components/product/JoinSection'
-import ProductFooter from './components/product/ProductFooter'
+import SiteFooter from './components/SiteFooter'
 import BackToTop from './components/company/BackToTop'
 
 /** UPark — Product page (/product). */
@@ -27,15 +27,15 @@ export default function ProductPage() {
     <div className="upark-product" id="top" ref={rootRef}>
       <ProductNav />
       <ProductHero />
+      <JourneyStrip />
       <FindSection />
       <DetailsSection />
       <ReserveSection />
       <NavigateSection />
       <ParkSection />
       <SubscriptionSection />
-      <JourneyStrip />
       <JoinSection />
-      <ProductFooter />
+      <SiteFooter />
       <BackToTop />
     </div>
   )

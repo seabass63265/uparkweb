@@ -17,10 +17,18 @@ export default function BetaLmuSection() {
           </p>
         </div>
         <div className="flex justify-center gs-reveal md:justify-end">
-          <div className="w-full max-w-sm aspect-square bg-[#f9fafb] rounded-[40px] p-8 shadow-inner border border-gray-100 flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 transition-transform duration-1000 group-hover:scale-110" />
+          <div className="w-full max-w-sm aspect-square rounded-[40px] shadow-inner border border-gray-100 flex flex-col justify-between relative overflow-hidden group">
+            <iframe
+              title="Loyola Marymount University campus map"
+              src="https://maps.google.com/maps?q=Loyola+Marymount+University,+Los+Angeles,+CA&z=15&output=embed"
+              className="absolute inset-0 w-full h-full border-0 grayscale-[35%] contrast-[1.05] transition-transform duration-1000 group-hover:scale-105"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
 
-            <div className="z-10 flex justify-between items-start">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/10 pointer-events-none" />
+
+            <div className="z-10 p-8 flex justify-between items-start pointer-events-none">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100">
                 <svg
                   width="20"
@@ -40,11 +48,11 @@ export default function BetaLmuSection() {
               </span>
             </div>
 
-            <div className="z-10 mt-auto">
-              <h3 className="t-monumental text-black text-6xl tracking-tighter mb-1">
+            <div className="z-10 mt-auto p-8 pointer-events-none">
+              <h3 className="t-monumental text-white text-6xl tracking-tighter mb-1">
                 LMU
               </h3>
-              <div className="t-mono text-gray-500 flex items-center gap-2">
+              <div className="t-mono text-white/80 flex items-center gap-2">
                 <div className="w-1 h-1 bg-brand rounded-full" />
                 LOS ANGELES, CA
               </div>

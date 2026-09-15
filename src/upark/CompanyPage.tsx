@@ -9,7 +9,7 @@ import TeamSection from './components/company/TeamSection'
 import AdvisorsSection from './components/company/AdvisorsSection'
 import CompanyVisionSection from './components/company/CompanyVisionSection'
 import ContactSection from './components/company/ContactSection'
-import CompanyFooter from './components/company/CompanyFooter'
+import SiteFooter from './components/SiteFooter'
 import BackToTop from './components/company/BackToTop'
 
 /** UPark — Company page (/company). */
@@ -31,7 +31,7 @@ export default function CompanyPage() {
       <AdvisorsSection />
       <CompanyVisionSection />
       <ContactSection />
-      <CompanyFooter />
+      <SiteFooter />
       <BackToTop />
     </div>
   )

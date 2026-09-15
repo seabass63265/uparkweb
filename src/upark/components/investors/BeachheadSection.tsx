@@ -21,7 +21,7 @@ export default function BeachheadSection() {
   return (
     <section
       id="why-universities"
-      className="bg-white rounded-[40px] my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16 py-24 md:py-32 shadow-[0_20px_40px_rgba(0,0,0,0.02)] border border-gray-100"
+      className="w-auto bg-white rounded-[40px] my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16 py-24 md:py-32 shadow-[0_20px_40px_rgba(0,0,0,0.02)] border border-gray-100"
     >
       <div className="content-wrap gs-reveal">
         <span className="t-mono mb-6 block text-brand">OUR BEACHHEAD</span>

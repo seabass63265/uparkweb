@@ -88,8 +88,9 @@ export default function OpportunitySection() {
               </div>
               <h4 className="text-xl font-bold mb-3">Parking Supply</h4>
               <p className="t-body-m text-gray-500">
-                Unused parking exists in communities without an efficient way to
-                discover it.
+                Students leaving campus create available parking spots, but
+                there is no efficient way to connect them with students
+                searching for parking.
               </p>
             </div>
           </div>

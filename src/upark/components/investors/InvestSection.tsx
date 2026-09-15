@@ -24,7 +24,7 @@ export default function InvestSection() {
   return (
     <section
       id="invest"
-      className="min-h-[80vh] flex items-center bg-fg text-white rounded-[40px] my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16"
+      className="w-auto min-h-[80vh] flex items-center bg-fg text-white rounded-[40px] my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16"
     >
       <div className="content-wrap w-full py-24">
         <div className="text-center mb-20 gs-reveal">

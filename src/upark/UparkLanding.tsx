@@ -8,10 +8,9 @@ import RevealSection from './components/RevealSection'
 import HowItWorksSection from './components/HowItWorksSection'
 import CampusSection from './components/CampusSection'
 import TwoSidesSection from './components/TwoSidesSection'
-import UniversitiesSection from './components/UniversitiesSection'
 import VisionSection from './components/VisionSection'
 import CtaSection from './components/CtaSection'
-import Footer from './components/Footer'
+import SiteFooter from './components/SiteFooter'
 
 /** Session flag: the intro clip plays once per browser session, then is skipped
  *  on any return to this page (e.g. navigating back from /company). */
@@ -56,10 +55,9 @@ export default function UparkLanding() {
       <HowItWorksSection />
       <CampusSection />
       <TwoSidesSection />
-      <UniversitiesSection />
       <VisionSection />
       <CtaSection />
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

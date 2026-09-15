@@ -30,7 +30,7 @@ export default function TractionSection() {
   return (
     <section
       id="traction"
-      className="pt-32 pb-32 bg-white rounded-[40px] shadow-sm my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16 border border-gray-100"
+      className="w-auto pt-32 pb-32 bg-white rounded-[40px] shadow-sm my-12 mx-4 md:mx-auto max-w-[1360px] px-8 md:px-16 border border-gray-100"
     >
       <div className="content-wrap gs-reveal">
         <div className="flex flex-col md:flex-row justify-between md:items-end mb-20 gap-8">

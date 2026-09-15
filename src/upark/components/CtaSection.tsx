@@ -7,7 +7,7 @@ export default function CtaSection() {
       <div className="cta-huge">
         <span className="less">Spend less time searching.</span>
         <br />
-        Spend more time moving.
+        Spend more time doing.
       </div>
       <div
         className="t-monumental"
@@ -30,28 +30,6 @@ export default function CtaSection() {
           style={{ padding: '1rem 2rem', fontSize: '1rem' }}
         >
           Partner With UPark
-        </a>
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
-          gap: '2rem',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.75rem',
-        }}
-      >
-        <a
-          href="#"
-          style={{ color: 'var(--gray-med)', textDecoration: 'none' }}
-        >
-          UNIVERSITY INQUIRIES ↗
-        </a>
-        <a
-          href="#"
-          style={{ color: 'var(--gray-med)', textDecoration: 'none' }}
-        >
-          INVESTOR RELATIONS ↗
         </a>
       </div>
     </section>
