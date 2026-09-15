@@ -24,13 +24,13 @@ export default function CtaSection() {
         >
           Join the Beta
         </Link>
-        <a
-          href="#"
+        <Link
+          to="/contact"
           className="btn btn-outline"
           style={{ padding: '1rem 2rem', fontSize: '1rem' }}
         >
           Partner With UPark
-        </a>
+        </Link>
       </div>
     </section>
   )

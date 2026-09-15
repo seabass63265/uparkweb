@@ -711,8 +711,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
-        background: var(--fg);
-        color: var(--bg);
+        background: var(--brand);
+        color: #fff;
         padding: 2rem 3rem;
         font-family: var(--font-display);
         font-weight: 900;
