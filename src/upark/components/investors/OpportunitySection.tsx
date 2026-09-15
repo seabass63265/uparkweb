@@ -117,10 +117,9 @@ export default function OpportunitySection() {
           <h4 className="t-mono text-brand mb-4">THE NETWORK EFFECT</h4>
           <h4 className="text-xl font-bold mb-3">Universities</h4>
           <p className="t-body-m text-gray-600">
-            As the network develops, parking activity could also provide
-            universities with a better understanding of when and where parking
-            demand occurs, transforming abstract problems into actionable
-            insights.
+            As UPark connects drivers with available parking, the same model
+            can grow beyond universities—connecting more people with parking
+            across neighborhoods, businesses, events, and more.
           </p>
         </div>
       </div>
