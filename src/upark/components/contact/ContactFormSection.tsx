@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { AUDIENCES, DEFAULT_INBOX, EMAIL_DOMAIN, type AudienceValue } from '../../../shared/contact'
 import { CheckIcon, InstagramIcon, LinkedInIcon, MapPinIcon, TikTokIcon } from './icons'
@@ -63,6 +63,19 @@ function clearDraft() {
   }
 }
 
+// Links from other pages can preselect the form, e.g. /contact?audience=investor&subject=materials.
+function applyLinkPreset(draft: Draft, search: string): Draft {
+  const params = new URLSearchParams(search)
+  const aud = AUDIENCES.find((a) => a.value === params.get('audience'))
+  if (!aud) return draft
+  const subject = aud.subjects.find((s) => s.value === params.get('subject'))?.value
+  return {
+    ...draft,
+    audience: aud.value,
+    subject: subject ?? (aud.value === draft.audience ? draft.subject : ''),
+  }
+}
+
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 function FieldError({ id, message }: { id: string; message?: string }) {
@@ -76,7 +89,9 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 
 /** Contact form (left) + direct-contact details (right). One form that adapts to who is writing. */
 export default function ContactFormSection() {
-  const [initial] = useState(loadDraft)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [initial] = useState(() => applyLinkPreset(loadDraft(), location.search))
   const [audience, setAudience] = useState<AudienceValue | ''>(initial.audience)
   const [subject, setSubject] = useState(initial.subject)
   const [values, setValues] = useState<Values>({
@@ -111,6 +126,14 @@ export default function ContactFormSection() {
 
   const clearError = (name: FieldName) =>
     setErrors((prev) => (prev[name] ? { ...prev, [name]: undefined } : prev))
+
+  // Once a link preset is applied, drop it from the URL so a later refresh restores the
+  // visitor's own choices (via the saved draft) instead of re-applying the preset.
+  useEffect(() => {
+    if (new URLSearchParams(location.search).has('audience')) {
+      navigate({ pathname: location.pathname, hash: location.hash }, { replace: true })
+    }
+  }, [location.pathname, location.search, location.hash, navigate])
 
   // The message box keeps its 4-row minimum and grows with the text instead of scrolling.
   const fitMessageHeight = () => {

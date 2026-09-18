@@ -1,22 +1,31 @@
+import { Link } from 'react-router-dom'
 import { ArrowRightIcon } from '../company/icons'
 
 /* Inferred section — the source paste cut off before `#invest`. Built in the
    design system's style; replace with the real markup when it lands. */
-const ROUTES = [
+const contactLink = (subject: string) =>
+  `/contact?audience=investor&subject=${subject}#contact-form-section`
+
+const INVESTOR_DECK_LINK = contactLink('materials')
+
+const ROUTES: { title: string; body: string; cta: string; to?: string }[] = [
   {
     title: 'Investor Deck',
     body: 'Request the full deck with market sizing, model, and roadmap.',
     cta: 'Request',
+    to: INVESTOR_DECK_LINK,
   },
   {
     title: 'Founder Conversation',
     body: 'Talk directly with the founding team about the opportunity.',
     cta: 'Connect',
+    to: contactLink('meeting'),
   },
   {
     title: 'General Inquiries',
     body: 'Anything else — partnerships, press, or advising.',
     cta: 'Contact',
+    to: contactLink('general'),
   },
 ]
 
@@ -40,27 +49,37 @@ export default function InvestSection() {
         </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 gs-stagger">
-          {ROUTES.map((r) => (
-            <div
-              key={r.title}
-              className="p-8 border border-white/15 rounded-3xl hover:border-white transition-colors group cursor-pointer"
-            >
-              <h4 className="text-xl font-bold mb-2">{r.title}</h4>
-              <p className="text-gray-400 mb-8">{r.body}</p>
-              <div className="text-brand font-medium flex items-center gap-2 group-hover:translate-x-2 transition-transform">
-                {r.cta} <ArrowRightIcon />
+          {ROUTES.map((r) => {
+            const className =
+              'block p-8 border border-white/15 rounded-3xl hover:border-white transition-colors group cursor-pointer'
+            const content = (
+              <>
+                <h4 className="text-xl font-bold mb-2">{r.title}</h4>
+                <p className="text-gray-400 mb-8">{r.body}</p>
+                <div className="text-brand font-medium flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                  {r.cta} <ArrowRightIcon />
+                </div>
+              </>
+            )
+            return r.to ? (
+              <Link key={r.title} to={r.to} className={className}>
+                {content}
+              </Link>
+            ) : (
+              <div key={r.title} className={className}>
+                {content}
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div className="text-center">
-          <a
-            href="#"
+          <Link
+            to={INVESTOR_DECK_LINK}
             className="btn btn-outline py-4 px-8 text-lg border border-white text-white hover:bg-white hover:text-black"
           >
             Request Investor Deck →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

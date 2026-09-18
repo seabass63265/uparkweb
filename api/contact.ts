@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Resend } from 'resend'
-import { AUDIENCES } from '../src/shared/contact.ts'
+import { AUDIENCES } from '../src/shared/contact.js'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const DOMAIN = process.env.RESEND_EMAIL_DOMAIN
