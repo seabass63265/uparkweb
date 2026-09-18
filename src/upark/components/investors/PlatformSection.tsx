@@ -117,7 +117,7 @@ export default function PlatformSection() {
         </div>
 
         <div className="text-center mt-20 gs-reveal">
-          <Link to="/" className="btn btn-outline py-3 px-6">
+          <Link to="/product" className="btn btn-outline py-3 px-6">
             Explore the Product →
           </Link>
         </div>

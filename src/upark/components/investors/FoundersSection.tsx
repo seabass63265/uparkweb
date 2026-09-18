@@ -19,7 +19,7 @@ export default function FoundersSection() {
           <TeamCard
             initials="SR"
             name="Sebastian Rocha"
-            role="Co-Founder & CEO"
+            role="CEO & Founder"
             bio={[
               'Sebastian began taking college courses through dual enrollment at Santa Monica College at age 16 before transferring to Loyola Marymount University, where he studied Computer Science with additional study in Statistics and Data Science.',
               'His background spans software development, product management, public-sector technology, entrepreneurship, and building technology around real-world problems.',
@@ -28,10 +28,19 @@ export default function FoundersSection() {
           <TeamCard
             initials="CTO"
             name="[CTO NAME]"
-            role="Co-Founder & CTO"
+            role="CTO"
             bioItalic
             bio={[
               "Bio placeholder focusing on software engineering, architecture, and the technical development of UPark's core platform and infrastructure.",
+            ]}
+          />
+          <TeamCard
+            initials="CSO"
+            name="[CSO NAME]"
+            role="CSO (Chief Strategy Officer)"
+            bioItalic
+            bio={[
+              "Bio placeholder focusing on strategy, growth, and the long-term direction of UPark.",
             ]}
           />
         </div>

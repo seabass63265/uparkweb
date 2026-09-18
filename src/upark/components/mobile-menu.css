@@ -35,9 +35,16 @@
   transition: height 0.3s var(--ease-apple, cubic-bezier(0.25, 1, 0.5, 1));
 }
 
-.um-burger:hover .um-burger__bg,
-.um-burger:focus-visible .um-burger__bg {
+.um-burger:hover .um-burger__bg {
   height: 100%;
+}
+
+/* Focus (e.g. returned here after closing the menu) gets an outline instead
+   of the hover fill, so the black "stairs" icon stays visible after every
+   open/close cycle rather than getting stuck under a solid blue fill. */
+.um-burger:focus-visible {
+  outline: 2px solid var(--um-accent, #0044ff);
+  outline-offset: -2px;
 }
 
 .um-burger__icon {

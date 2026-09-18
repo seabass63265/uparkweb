@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 /** Investor hero over a skewed campus-grid backdrop with two drifting "car" dots. */
 export default function InvestorsHero() {
   return (
@@ -78,12 +80,12 @@ export default function InvestorsHero() {
           <a href="#invest" className="btn py-4 px-8 text-lg">
             Request Investor Deck →
           </a>
-          <a
-            href="#founders"
+          <Link
+            to="/company#team"
             className="btn btn-outline py-4 px-8 text-lg bg-white bg-opacity-50 backdrop-blur-sm"
           >
             Meet the Founders →
-          </a>
+          </Link>
         </div>
       </div>
     </header>

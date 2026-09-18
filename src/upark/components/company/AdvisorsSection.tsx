@@ -1,8 +1,8 @@
 const ADVISORS = [
-  'Business & Strategy',
-  'Technology',
-  'Higher Education',
-  'Mobility',
+  { name: 'Dr. Sunil Murthy', specialty: 'Business & Technology', photo: '/sunilmurthy.png' },
+  { name: 'Robert (B.J.) Johnson', specialty: 'Technology', photo: '/bj.png' },
+  { name: 'Advisor Name', specialty: 'Higher Education', photo: null },
+  { name: 'Advisor Name', specialty: 'Mobility', photo: null },
 ]
 
 export default function AdvisorsSection() {
@@ -20,9 +20,16 @@ export default function AdvisorsSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16 border-t border-gray-200 pt-16">
-          {ADVISORS.map((specialty) => (
-            <div key={specialty} className="flex flex-col">
-              <h4 className="text-xl font-bold mb-1">Advisor Name</h4>
+          {ADVISORS.map(({ name, specialty, photo }, i) => (
+            <div key={`${name}-${specialty}-${i}`} className="flex flex-col">
+              {photo && (
+                <img
+                  src={photo}
+                  alt={name}
+                  className="w-full max-w-[200px] aspect-square object-cover object-[50%_20%] mb-4"
+                />
+              )}
+              <h4 className="text-xl font-bold mb-1">{name}</h4>
               <p className="t-mono text-brand mb-4">{specialty}</p>
               <div className="h-[1px] w-8 bg-gray-300" />
             </div>

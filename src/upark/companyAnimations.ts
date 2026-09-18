@@ -95,8 +95,24 @@ export function initCompanyAnimations(root: HTMLElement): () => void {
   const fonts = (document as Document & { fonts?: FontFaceSet }).fonts
   fonts?.ready.then(refresh).catch(() => {})
 
+  /* Images (advisor/team photos) load after mount and change section
+     heights, which shifts the pinned vision section's start/end offsets.
+     window's `load` event has usually already fired by the time this page
+     is navigated to in the SPA, so refresh again as each image resolves. */
+  const images = Array.from(root.querySelectorAll('img'))
+  images
+    .filter((img) => !img.complete)
+    .forEach((img) => {
+      img.addEventListener('load', refresh, { once: true })
+      img.addEventListener('error', refresh, { once: true })
+    })
+
   return () => {
     window.removeEventListener('load', refresh)
+    images.forEach((img) => {
+      img.removeEventListener('load', refresh)
+      img.removeEventListener('error', refresh)
+    })
     ctx.revert()
   }
 }
