@@ -34,19 +34,38 @@ function RoleRadio({ value, required }: { value: string; required?: boolean }) {
 /** Contact form (left) + direct-contact details (right), with a fading success state. */
 export default function ContactFormSection() {
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const formContentRef = useRef<HTMLDivElement>(null)
   const successRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formEl = e.currentTarget
     if (!formEl.checkValidity()) {
       formEl.reportValidity()
       return
     }
-    setSubmitted(true)
+
+    const data = Object.fromEntries(new FormData(formEl))
+    setSending(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Failed to send message')
+      setSubmitted(true)
+    } catch {
+      setError("Something went wrong sending your message. Please try again, or email us directly.")
+    } finally {
+      setSending(false)
+    }
   }
 
   useEffect(() => {
@@ -166,9 +185,14 @@ export default function ContactFormSection() {
                   </div>
 
                   <div className="pt-2">
-                    <button type="submit" className="btn py-4 px-10 text-lg w-full md:w-auto">
-                      SEND MESSAGE →
+                    <button
+                      type="submit"
+                      disabled={sending}
+                      className="btn py-4 px-10 text-lg w-full md:w-auto disabled:opacity-60"
+                    >
+                      {sending ? 'SENDING…' : 'SEND MESSAGE →'}
                     </button>
+                    {error && <p className="text-sm text-red-500 mt-3">{error}</p>}
                   </div>
                 </form>
               </div>
@@ -202,10 +226,10 @@ export default function ContactFormSection() {
             <div>
               <span className="t-mono text-gray-400 mb-4 block">DIRECT EMAIL</span>
               <a
-                href="mailto:hello@upark.app"
+                href="mailto:contact@upark.dev"
                 className="t-h2 text-black hover:text-brand transition-colors inline-block pb-1 border-b-2 border-transparent hover:border-brand"
               >
-                hello@upark.app
+                contact@upark.dev
               </a>
             </div>
 

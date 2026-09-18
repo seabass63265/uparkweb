@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*
+
+# Auto-installed agent skills (from `vercel integration add`)
+.agents
+.claude
+skills-lock.json
