@@ -3,7 +3,6 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const DOMAIN = process.env.RESEND_EMAIL_DOMAIN
-const TO_ADDRESS = `contact@${DOMAIN}`
 const FROM_ADDRESS = `UPark Contact Form <onboarding@${DOMAIN}>`
 
 const ROLES = ['Student', 'University Rep', 'Investor', 'Other']
@@ -16,6 +15,14 @@ const SUBJECTS: Record<string, string> = {
   bug: 'Report a Bug',
   other: 'Something Else',
 }
+
+// Route by subject: investor/partnership inquiries go to their own inbox,
+// everything else lands in the general contact inbox.
+const SUBJECT_ROUTES: Record<string, string> = {
+  investor: `investors@${DOMAIN}`,
+  partnership: `partnerships@${DOMAIN}`,
+}
+const DEFAULT_TO_ADDRESS = `contact@${DOMAIN}`
 
 function escapeHtml(value: string) {
   return value
@@ -49,9 +56,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const toAddress = SUBJECT_ROUTES[subject] ?? DEFAULT_TO_ADDRESS
     const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
-      to: [TO_ADDRESS],
+      to: [toAddress],
       replyTo: email,
       subject: `[${SUBJECTS[subject]}] ${fullName}`,
       html: `
