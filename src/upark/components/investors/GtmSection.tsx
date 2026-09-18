@@ -58,7 +58,7 @@ export default function GtmSection() {
       </div>
 
       <div className="content-wrap max-w-5xl mx-auto gs-reveal">
-        <span className="t-mono mb-6 block text-brand">GO-TO-MARKET</span>
+        <span className="t-mono mb-6 block text-white">GO-TO-MARKET</span>
         <h2 className="t-h1 mb-24 max-w-3xl">
           Start local.
           <br />
@@ -83,7 +83,7 @@ export default function GtmSection() {
                 />
               </div>
               <span
-                className={`t-mono mb-2 block ${step.accent ? 'text-brand' : 'text-gray-500'}`}
+                className={`t-mono text-sm tracking-wider mb-2 block ${step.accent ? 'text-white' : 'text-white/60'}`}
               >
                 {step.num}
               </span>
