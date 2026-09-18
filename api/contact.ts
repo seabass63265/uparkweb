@@ -1,28 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Resend } from 'resend'
+import { AUDIENCES } from '../src/shared/contact.ts'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const DOMAIN = process.env.RESEND_EMAIL_DOMAIN
 const FROM_ADDRESS = `UPark Contact Form <onboarding@${DOMAIN}>`
 
-const ROLES = ['Student', 'University Rep', 'Investor', 'Other']
-const SUBJECTS: Record<string, string> = {
-  general: 'General Inquiry',
-  partnership: 'Partnership Opportunity',
-  onboarding: 'University Onboarding',
-  investor: 'Investor Relations',
-  media: 'Media & Press',
-  bug: 'Report a Bug',
-  other: 'Something Else',
-}
-
-// Route by subject: investor/partnership inquiries go to their own inbox,
-// everything else lands in the general contact inbox.
-const SUBJECT_ROUTES: Record<string, string> = {
-  investor: `investors@${DOMAIN}`,
-  partnership: `partnerships@${DOMAIN}`,
-}
-const DEFAULT_TO_ADDRESS = `contact@${DOMAIN}`
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function escapeHtml(value: string) {
   return value
@@ -38,37 +22,50 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { fullName, email, role, subject, message } = req.body ?? {}
+  const { fullName, email, audience, subject, organization, message } = req.body ?? {}
+
+  const audienceConfig = AUDIENCES.find((a) => a.value === audience)
+  const subjectConfig = audienceConfig?.subjects.find((s) => s.value === subject)
 
   if (
     typeof fullName !== 'string' ||
     typeof email !== 'string' ||
-    typeof role !== 'string' ||
-    typeof subject !== 'string' ||
     typeof message !== 'string' ||
     !fullName.trim() ||
-    !email.trim() ||
-    !ROLES.includes(role) ||
-    !SUBJECTS[subject] ||
-    !message.trim()
+    !EMAIL_PATTERN.test(email.trim()) ||
+    !message.trim() ||
+    fullName.length > 200 ||
+    email.length > 320 ||
+    message.length > 5000 ||
+    !audienceConfig ||
+    !subjectConfig ||
+    (organization !== undefined &&
+      (typeof organization !== 'string' || organization.length > 200))
   ) {
     return res.status(400).json({ error: 'Invalid or missing fields' })
   }
 
+  const org =
+    audienceConfig.orgField && typeof organization === 'string' ? organization.trim() : ''
+
   try {
-    const toAddress = SUBJECT_ROUTES[subject] ?? DEFAULT_TO_ADDRESS
     const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
-      to: [toAddress],
-      replyTo: email,
-      subject: `[${SUBJECTS[subject]}] ${fullName}`,
+      to: [`${audienceConfig.inbox}@${DOMAIN}`],
+      replyTo: email.trim(),
+      subject: `[${audienceConfig.label}: ${subjectConfig.label}] ${fullName.trim()}`,
       html: `
-        <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Role:</strong> ${escapeHtml(role)}</p>
-        <p><strong>Subject:</strong> ${escapeHtml(SUBJECTS[subject])}</p>
+        <p><strong>Name:</strong> ${escapeHtml(fullName.trim())}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
+        <p><strong>I am a:</strong> ${escapeHtml(audienceConfig.label)}</p>
+        ${
+          org && audienceConfig.orgField
+            ? `<p><strong>${escapeHtml(audienceConfig.orgField.label)}:</strong> ${escapeHtml(org)}</p>`
+            : ''
+        }
+        <p><strong>Subject:</strong> ${escapeHtml(subjectConfig.label)}</p>
         <p><strong>Message:</strong></p>
-        <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
+        <p>${escapeHtml(message.trim()).replace(/\n/g, '<br />')}</p>
       `,
     })
 
