@@ -96,9 +96,9 @@ export default function Hero({ revealed, onReveal, skipIntro }: HeroProps) {
         </p>
 
         <div className="hero-actions">
-          <a href="#" className="btn hero-btn-primary">
+          <Link to="/product" className="btn hero-btn-primary">
             Explore UPark <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
           <Link to="/join" className="btn btn-outline">
             Join the Beta
           </Link>
