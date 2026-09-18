@@ -54,6 +54,8 @@ function PillRadio({
 export default function BetaFormSection() {
   const [university, setUniversity] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState(
     'Thanks for joining the UPark Beta. We’ll keep you updated as we get closer to our first campus testing.',
   )
@@ -63,13 +65,32 @@ export default function BetaFormSection() {
   const spotRef = useRef<HTMLDivElement>(null)
   const spotTxtRef = useRef<HTMLDivElement>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formEl = e.currentTarget
     if (!formEl.checkValidity()) {
       formEl.reportValidity()
       return
     }
+
+    const { firstName, lastName, email } = Object.fromEntries(new FormData(formEl))
+    setSending(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName, lastName, email }),
+      })
+      if (!res.ok) throw new Error('Failed to subscribe')
+    } catch {
+      setError('Something went wrong signing you up. Please try again in a moment.')
+      setSending(false)
+      return
+    }
+    setSending(false)
+
     if (university === 'lmu') {
       setSuccessMsg(
         'You’ll be among the first to hear when LMU beta testing begins.',
@@ -338,10 +359,12 @@ export default function BetaFormSection() {
               <div className="pt-6 border-t border-gray-100 flex flex-col items-center">
                 <button
                   type="submit"
+                  disabled={sending}
                   className="btn py-4 px-12 text-lg w-full md:w-auto"
                 >
-                  JOIN THE BETA →
+                  {sending ? 'JOINING…' : 'JOIN THE BETA →'}
                 </button>
+                {error && <p className="text-sm text-red-500 mt-3">{error}</p>}
                 <p className="text-xs text-gray-400 mt-4 text-center max-w-md">
                   By joining, your information will be used for UPark beta
                   communication and product research. Joining the waitlist does
