@@ -499,8 +499,8 @@ export default function ContactFormSection() {
 
             <div>
               <span className="t-mono text-gray-400 mb-4 block">LOCATION</span>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#F4F4F6] rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F6] rounded-full flex items-center justify-center shrink-0">
                   <MapPinIcon />
                 </div>
                 <div>
